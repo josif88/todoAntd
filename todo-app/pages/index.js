@@ -12,6 +12,10 @@ export default function Home() {
   };
 
   const addTodo = (todo) => {
+    if(!todo){
+      alert("Please input text");
+      return;
+    }
     setTodoList([todo, ...todoList]);
     setToDoText("");
     localStorage.setItem("todos", JSON.stringify([todo, ...todoList]));
