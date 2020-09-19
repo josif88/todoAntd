@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Input, Button, Card, Typography } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+
+import TodoItem from "../components/TodoItem";
+import TodoForm from "../components/TodoForm";
 
 export default function Home() {
   const [todoText, setToDoText] = useState("");
@@ -39,63 +40,17 @@ export default function Home() {
 
   return (
     <div className="container">
-      <div className="form">
-        <Row gutter={20}>
-          <Col span={16}>
-            <Input placeholder="TODO" value={todoText} onChange={handleText} />
-          </Col>
-          <Col span={4}>
-            <Button
-              onClick={() => {
-                addTodo(todoText);
-              }}
-              style={{ width: "100%" }}
-              type="primary"
-              shape="round"
-              icon={<PlusOutlined />}
-            >
-              Add
-            </Button>
-          </Col>
-          <Col span={4}>
-            <Button
-              onClick={() => {
-                addTodo(todoText);
-              }}
-              danger
-              onClick={clearList}
-              style={{ width: "100%" }}
-              type="primary"
-              shape="round"
-              icon={<DeleteOutlined />}
-            >
-              Remove all
-            </Button>
-          </Col>
-        </Row>
-      </div>
+      <TodoForm addTodo={addTodo} todoText={todoText} handleText={handleText} clearList={clearList} />
       <div className="todos">
         {todoList.map((a, i) => (
-          <Card hoverable>
-            <Row>
-              <Col span={23}>
-                <Typography.Text strong>{a}</Typography.Text>
-              </Col>
-              <Col span={1}>
-                <Button
-                  onClick={() => {
-                    addTodo(todoText);
-                  }}
-                  danger
-                  onClick={clearList}
-                  type="primary"
-                  shape="circle"
-                  icon={<DeleteOutlined />}
-                  onClick={() => removeItem(a)}
-                />
-              </Col>
-            </Row>
-          </Card>
+          <TodoItem
+            key={i}
+            todoText={todoText}
+            item={a}
+            removeItem={removeItem}
+            addTodo={addTodo}
+            clearList={clearList}
+          />
         ))}
       </div>
     </div>
