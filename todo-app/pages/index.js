@@ -21,20 +21,12 @@ export default function Home() {
     localStorage.setItem("todos", "");
   };
 
-  const removeItem = (i) => {
-    setTodoList(
-      todoList.filter((el) => {
-        el !== i;
-      })
-    );
+  const removeItem = (item) => {
+    setTodoList(todoList.filter((el) => el !== item));
 
     localStorage.setItem(
       "todos",
-      JSON.stringify(
-        todoList.filter((el) => {
-          el !== i;
-        })
-      )
+      JSON.stringify(todoList.filter((el) => el !== item))
     );
   };
 
